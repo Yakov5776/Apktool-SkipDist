@@ -193,7 +193,7 @@ public class Framework {
         throw new CantFindFrameworkResException(id);
     }
 
-    private boolean isPrivateFrameworkId(int id) {
+    public static boolean isPrivateFrameworkId(int id) {
         return id == 127;
     }
 
