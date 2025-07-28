@@ -204,7 +204,14 @@ public class ResTable {
 
     private ResPackage loadFrameworkPackage(int id) throws AndrolibException {
         Framework framework = new Framework(mConfig);
-        File apkFile = framework.getApkFile(id, mConfig.getFrameworkTag());
+        File apkFile;
+
+        try {
+            apkFile = framework.getApkFile(id, mConfig.getFrameworkTag());
+        } catch (Framework.PrivateFrameworkException ex) {
+            LOGGER.warning(String.format("Could not load framework package: %d, Skipping.", id));
+            return null;
+        }
 
         ResPackage pkg = loadResPackageFromApk(apkFile, true);
         if (id != pkg.getId()) {
