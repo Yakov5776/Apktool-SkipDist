@@ -168,6 +168,9 @@ public class ResTable {
             }
         }
 
+        if (pkg == null) {
+            throw new UndefinedResObjectException("package: id=" + id);
+        }
         return pkg;
     }
 
