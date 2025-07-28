@@ -187,7 +187,7 @@ public class Framework {
         // Issue #3928 - Some applications use framework-res.apk as a library, but it is not a real framework.
         // It is a private framework, so we should not load it.
         if (isPrivateFrameworkId(id)) {
-            return null;
+            throw new CantFindFrameworkResException(id, "Skipping private framework reference");
         }
 
         throw new CantFindFrameworkResException(id);
