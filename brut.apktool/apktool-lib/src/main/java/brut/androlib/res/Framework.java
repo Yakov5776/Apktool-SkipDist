@@ -39,6 +39,12 @@ import java.util.zip.ZipOutputStream;
 public class Framework {
     private static final Logger LOGGER = Logger.getLogger(Framework.class.getName());
 
+    public static class PrivateFrameworkException extends AndrolibException {
+        public PrivateFrameworkException(String message) {
+            super(message);
+        }
+    }
+
     private final Config mConfig;
     private File mDirectory;
 
@@ -187,7 +193,7 @@ public class Framework {
         // Issue #3928 - Some applications use framework-res.apk as a library, but it is not a real framework.
         // It is a private framework, so we should not load it.
         if (isPrivateFrameworkId(id)) {
-            throw new CantFindFrameworkResException(id, "Skipping private framework reference");
+            throw new PrivateFrameworkException("Skipping private framework reference: " + id);
         }
 
         throw new CantFindFrameworkResException(id);
