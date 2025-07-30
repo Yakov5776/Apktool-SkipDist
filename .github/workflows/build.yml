@@ -30,15 +30,9 @@ jobs:
           dependency-graph: generate-and-submit
 
       - name: Build (Linux/Mac)
-        if: runner.os != 'Windows'
         run: ./gradlew build shadowJar proguard
-
-      - name: Build (Windows)
-        if: runner.os == 'Windows'
-        run: ./gradlew.bat build shadowJar proguard
 
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
-          name: apktool.jar
-          path: brut.apktool/apktool-cli/build/libs/apktool-v*
+          path: brut.apktool/apktool-cli/build/libs/*
